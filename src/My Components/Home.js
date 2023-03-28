@@ -16,23 +16,25 @@ function Home() {
   const [expense, updateExpense] = useState(0);
   const [income, updateIncome] = useState(0);
 
-  const calculateBalance = () => {
+  useEffect(() => {
+    const calculateBalance = () => {
       let exp = 0;
       let inc = 0;
       transaction.map((payload) =>
-          payload.type === "EXPENSE"
-              ? (exp = exp + payload.amount)
-              : (inc = inc + payload.amount),
+        payload.type === "EXPENSE"
+          ? (exp = exp + payload.amount)
+          : (inc = inc + payload.amount)
       );
       updateExpense(exp);
       updateIncome(inc);
-  };
-  useEffect(() => calculateBalance(), [transaction]);
+    };
+    calculateBalance();
+  }, [transaction, updateExpense, updateIncome]);
 
   const addTransaction = (payload) => {
-      const transactionArray = [...transaction];
-      transactionArray.push(payload);
-      updateTransaction(transactionArray);
+    const transactionArray = [...transaction];
+    transactionArray.push(payload);
+    updateTransaction(transactionArray);
   };
   return ( 
     <Container>
