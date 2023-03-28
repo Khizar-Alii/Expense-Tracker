@@ -77,8 +77,8 @@ color : ${(props) => (props.isIncome ? 'green' : 'red')}
 `
 
 const AddTransactionView = (props) =>{
-  const [amount , setAmount] = useState()
-  const [desc , setDesc] = useState()
+  const [amount , setAmount] = useState("")
+  const [desc , setDesc] = useState("")
   const [type , settype] = useState('EXPENSE')
   const Add = () => {
     props.addTransaction({
@@ -87,11 +87,17 @@ const AddTransactionView = (props) =>{
     props.togggelBtn()
   }
   
+  const handleChangeAmount = (e) =>{
+    setAmount(e.target.value)
+  }
+  const handleChangeDesc = (e) =>{
+    setDesc(e.target.value)
+  }
 
   return(
     <AddTransactionContainer>
-      <input type="number" placeholder="Amount" value={amount} onChange = {(e)=>setAmount(e.target.value)}/>
-      <input type="text" placeholder="Description" value={desc} onChange = {(e)=>setDesc(e.target.value)}/>
+      <input type="number" placeholder="Amount" value={amount} onChange = {handleChangeAmount}/>
+      <input type="text" placeholder="Description" value={desc} onChange = {handleChangeDesc}/>
       <RadioBox>
         <input type="radio" name="type" id="expense" value='EXPENSE' checked = {type === "EXPENSE"} onChange ={(e)=>settype(e.target.value)}/>
         <label htmlFor="expense">Expense</label>

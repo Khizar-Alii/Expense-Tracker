@@ -59,6 +59,7 @@ function Trancation(props) {
 
   useEffect(() => {
     filterData(searchText);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.transaction]);
 
   return (
@@ -72,7 +73,7 @@ function Trancation(props) {
         }}
       />
       {filteredTransaction?.map((payload) => (
-        <TransactionCell payload={payload} />
+        <TransactionCell payload={payload} key={payload.id}/>
       ))}
     </Container>
   );
